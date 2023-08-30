@@ -116,5 +116,57 @@ class JoblyApi {
 
   //~~~~~~~~~~~~~~~~~~~~~~~~~~~Jobs ~~~~~~~~~~~~~~~~~~~~~~~~~//
 
-  //create jobs
+  /**   Get details of all jobs
+   *    Returns a list of jobs
+   *
+   *   { jobs: [ { id, title, salary, equity, companyHandle, companyName }, ...] }
+   */
+  static async getJobs() {
+    let res = await this.request("jobs");
+    return res.jobs;
+  }
+
+  /** Get details on a job by id.
+   *
+   *  Takes a job id and returns an object
+   *  Job is { id, title, salary, equity, company}
+   *   where company is { handle, name, description, numEmployees, logoUrl }
+  */
+  static async getJob(id) {
+    let res = await this.request(`jobs/${id}`);
+    return res.job;
+  }
+
+  /** Create a job.
+ *
+ *  Takes an object of job
+ * job should be { title, salary, equity, companyHandle }
+ *
+ *  Returns { id, title, salary, equity, companyHandle }
+*/
+  static async createJob(job) {
+    let res = await this.request(`jobs/`, job, "post");
+    return res.job;
+  }
+
+  /** Remove a job
+   *  Takes a job id
+   *  Returns { deleted: id }
+  */
+  static async removeJob(id) {
+    let res = await this.request(`jobs/${id}`, {}, "delete");
+    return res.deleted;
+  }
+
+  /** Edit a job
+  *
+  *  Takes fields of a job
+  *  fields can be: { title, salary, equity }
+  *
+  *  Returns { id, title, salary, equity, companyHandle }
+  */
+  static async editJob(id, fields) {
+    let res = await this.request(`companies/${id}`, fields, "patch");
+    return res.job;
+  }
 }
