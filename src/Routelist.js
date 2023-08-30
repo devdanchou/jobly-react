@@ -9,6 +9,19 @@ import CompanyList from './CompanyList';
 import CompanyDetail from './CompanyDetails';
 import JobList from './JobList';
 
+/** Shows routes to:
+ * - homepage
+ * - companies
+ * - companies/:handle
+ * - jobs
+ *
+ * Props: none
+ *
+ * State: none
+ *
+ * App -> RouteList
+ */
+
 function RouteList({ }) {
   return (
     <Routes>

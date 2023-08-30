@@ -1,11 +1,24 @@
 import { NavLink } from "react-router-dom";
 import "./NavBar.css";
 
+/** Shows links to:
+ * - homepage
+ * - companies
+ * - jobs
+ *
+ * Props:
+ * links = ['companies', 'jobs']
+ *
+ * State: none
+ *
+ * App -> NavBar
+ */
+
 function NavBar({ links }) {
   const navLinks = links.map(link => (
     <NavLink className='NavBar-link'
       key={link}
-      to={`/${link}`}
+      to={`/${link.toLowerCase()}`}
     >
       {link}
     </NavLink>

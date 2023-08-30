@@ -2,6 +2,16 @@ import React from 'react';
 import SearchForm from './SearchForm';
 import JobCardList from './JobCardList';
 
+/** Presentional Component
+ * Display a list of jobs and a search form
+ *
+ * Prop: none
+ *
+ * State: none atm
+ *
+ * RouteList -> JobList -> {JobCardList, SearchForm}
+ */
+
 function JobList() {
 
   //  const [jobs, setJobs] = useState([])
