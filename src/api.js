@@ -19,6 +19,9 @@ class JoblyApi {
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
   static async request(endpoint, data = {}, method = "get") {
+    // (endpoint) => (endpoint, undefined, undefined)
+    // (endpoint) => (endpoint, {}, "delete")
+    // (endpoint) => (data={...}, method="post")
     console.debug("API Call:", endpoint, data, method);
 
     const url = `${BASE_URL}/${endpoint}`;
@@ -26,7 +29,8 @@ class JoblyApi {
     const params = (method === "get")
       ? data
       : {};
-
+    //  axios(url, 'get', data, params=data, headers)
+    //  axios(url, 'post', data=data, params={}, headers)
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {
@@ -38,40 +42,79 @@ class JoblyApi {
 
   // Individual API routes
 
-  /** Get details on a company by handle. */
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~ Companies ~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+  /** Get details on a company by handle.
+   *
+   *  Takes a company handle : 'Davis-Davis'
+   *
+   *  Returns an object of company
+   *  Company is { handle, name, description, numEmployees, logoUrl, jobs }
+   *   where jobs is [{ id, title, salary, equity }, ...]
+  */
 
   static async getCompany(handle) {
     let res = await this.request(`companies/${handle}`);
     return res.company;
   }
 
-  /** Get details on all companies. */
+  /** Get details on all companies.
+   *
+   *  Returns a list of companies
+   *
+   * { companies: [ { handle, name, description, numEmployees, logoUrl }, ...] }
+  */
   static async getCompanies() {
     let res = await this.request("companies/");
     return res.companies;
   }
 
+  /** Create a company.
+   *
+   *  Takes an object of company
+   *  {
+        handle: "new",
+        name: "New",
+        description: "test New Description",
+        numEmployees: 5,
+        logoUrl: "http://new.img"
+      }
 
-  static async removeCompany(handle) {
-    let res = await this.request(`companies/${handle}`);
+     Returns an object of created company
+     { handle, name, description, numEmployees, logoUrl }
+   *
+   *
+  */
+  static async createCompany(company) {
+    let res = await this.request(`companies/`, company, "post");
     return res.company;
   }
 
-  // TODO: Work on this
+  /** Remove a company
+   *  Takes a company handle
+   *  Returns { deleted: handle }
+  */
   static async removeCompany(handle) {
-    let res = await this.request(`companies/${handle}`);
+    let res = await this.request(`companies/${handle}`, {}, 'delete');
+    // let res = await this.request(url = `companies/${handle}`, method = 'delete');
     return res.deleted;
   }
 
-  static async createCompany(handle) {
-    let res = await this.request(`companies/${handle}`,
-      data, "post");
+  /** Edit a company
+  *
+  *  Takes fields of a company
+  *  fields can be: { name, description, numEmployees, logo_url }
+  *
+  *  Returns { handle, name, description, numEmployees, logo_url }
+  */
+
+  static async editCompany(handle, fields) {
+    let res = await this.request(`companies/${handle}`, fields, "patch");
     return res.company;
   }
 
 
-  // obviously, you'll add a lot here ...
-  // create companies
-  // add companies
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~Jobs ~~~~~~~~~~~~~~~~~~~~~~~~~//
+
   //create jobs
 }
