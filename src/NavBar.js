@@ -3,7 +3,7 @@ import "./NavBar.css";
 
 function NavBar({ links }) {
   const navLinks = links.map(link => (
-    <NavLink
+    <NavLink className='NavBar-link'
       key={link}
       to={`/${link}`}
     >
@@ -12,12 +12,14 @@ function NavBar({ links }) {
   ));
 
   return (
+
     <nav className="NavBar">
-      <NavLink to="/" end>
+      <NavLink className='NavBar-link' to="/" end>
         Jobly
       </NavLink>
       {navLinks}
     </nav>
+
   );
 }
 

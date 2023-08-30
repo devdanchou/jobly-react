@@ -6,7 +6,7 @@ import {
 
 import Home from './Home';
 import CompanyList from './CompanyList';
-import CompanyDetail from './CompanyDetail';
+import CompanyDetail from './CompanyDetails';
 import JobList from './JobList';
 
 function RouteList({ }) {
