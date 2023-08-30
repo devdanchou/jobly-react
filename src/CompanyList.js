@@ -2,9 +2,17 @@ import React from 'react';
 import CompanyCard from './CompanyCard';
 import SearchForm from './SearchForm';
 import { Link } from 'react-router-dom';
-import CompanyDetails from './CompanyDetails';
+
 
 function CompanyList() {
+
+  //  const [companies, setCompanies] = useState([])
+  //
+  //  async function getCompaniesList(){
+  //    const companies = await getCompanies()
+  //  set setCompanies(companies)
+  //}
+
 
   // dummy companies
   const companies = [
@@ -12,19 +20,22 @@ function CompanyList() {
       id: 1,
       handle: 'A',
       description: ' I am A',
-      jobs: [{ id: 1, title: 'SE' }, { id: 2, title: 'front desk' }]
     },
     {
       id: 2,
       handle: 'B',
       description: 'I am B',
-      jobs: [{ id: 1, title: 'office man' }, { id: 2, title: 'front desk' }]
     }];
+
+  // dummy function
+  function searchFor() {
+
+  }
 
   return (
     <div className="CompanyList">
       Hola.
-      <SearchForm />
+      <SearchForm searchFor={searchFor} />
       {companies.map(company =>
         <Link key={company.id} to={`/companies/${company.handle}`}>
           <CompanyCard company={company} />
