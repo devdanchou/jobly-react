@@ -22,7 +22,7 @@ import JobList from './JobList';
  * App -> RouteList
  */
 
-function RouteList({ }) {
+function RouteList() {
   return (
     <Routes>
       <Route
