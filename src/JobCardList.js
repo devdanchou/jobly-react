@@ -5,11 +5,15 @@ import JobCard from './JobCard';
 * Display a list of jobcards
 *
 * Prop: jobs
-* example: [ { id, title, salary, equity, companyHandle, companyName }, ...]
+*   If it is from  JobList :
+*       jobs: [ { id, title, salary, equity, companyHandle, companyName }, ...]
+*
+*   If it is from  CompanyDetails :
+*       jobs: [ { id, title, salary, equity}, ...]
 *
 * State: none
 *
-* JobList -> JobCardList -> JobCard
+* {JobList + CompanyDetails}  -> JobCardList -> JobCard
 */
 
 function JobCardList({ jobs }) {
@@ -17,7 +21,7 @@ function JobCardList({ jobs }) {
   console.log("in JobCardList, jobs = ", jobs);
   return (
     <div className='JobCardList'>
-      Jobs: {jobs.map(job => <JobCard key={job.id} job={job} />)}
+      {jobs.map(job => <JobCard key={job.id} job={job} />)}
     </div >
   );
 }

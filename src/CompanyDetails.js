@@ -19,6 +19,7 @@ import JoblyApi from './api';
  * RouteList -> CompanyDetails -> JobCardList
  */
 
+
 function CompanyDetails() {
 
   const { handle } = useParams();
@@ -57,8 +58,8 @@ function CompanyDetails() {
 
   return (
     <div className="CompanyDetails" >
-      <p>Name:{company.data.handle}</p>
-      <p>Description: {company.data.description}</p>
+      <p>{company.data.handle}</p>
+      <p>{company.data.description}</p>
       <JobCardList jobs={company.data.jobs} />
     </div>
   );

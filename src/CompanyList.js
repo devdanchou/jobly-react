@@ -24,7 +24,7 @@ function CompanyList() {
   const [companies, setCompanies] = useState({
     data: null,
     isLoading: true,
-    searchedCompany: null,
+    searchedCompanies: null,
     errors: null
   });
 
@@ -41,7 +41,7 @@ function CompanyList() {
       setCompanies({
         isLoading: false,
         data: fetchedCompanies,
-        searchedCompany: null,
+        searchedCompanies: null,
         errors: null
       });
 
@@ -50,28 +50,32 @@ function CompanyList() {
       setCompanies({
         isLoading: false,
         data: null,
-        searchedCompany: null,
+        searchedCompanies: null,
         errors: err
       });
     }
   }
 
 
-  async function searchFor(handle) {
+  async function searchFor(name) {
     try {
-      const foundCompany = await JoblyApi.getCompany(handle);
+      const foundCompanies = await JoblyApi.getCompanies(name);
       setCompanies({
         ...companies,
         isLoading: false,
-        searchedCompany: foundCompany,
+        searchedCompanies: foundCompanies,
         errors: null
       });
+
+      if (foundCompanies.length === 0) {
+        throw new Error('No Results Found');
+      }
     } catch (err) {
 
       setCompanies({
         ...companies,
         isLoading: false,
-        searchedCompany: null,
+        searchedCompanies: null,
         errors: err
       });
     }
@@ -83,7 +87,7 @@ function CompanyList() {
     return <h1>Loading...</h1>;
   } else if (companies.errors) {
     console.log('CompanyList error=', companies.errors);
-    return <b> Errors occured!</b>;
+    return <b>{companies.errors.message}</b>;
   }
 
   const displayCompanies = companies.data.map(company =>
@@ -91,13 +95,19 @@ function CompanyList() {
       <CompanyCard company={company} />
     </Link>);
 
+  const displaySearchedCompanies = companies.searchedCompanies?.map(
+    company =>
+      <Link key={company.handle} to={`/companies/${company.handle}`}>
+        <CompanyCard company={company} />
+      </Link>
+  );
+
 
   return (
     <div className="CompanyList">
-      Hola.
       <SearchForm searchFor={searchFor} />
-      {companies.searchedCompany
-        ? <CompanyCard company={companies.searchedCompany} />
+      {companies.searchedCompanies && companies.searchedCompanies.length !== 0
+        ? displaySearchedCompanies
         : displayCompanies}
     </div>
   );

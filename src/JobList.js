@@ -29,7 +29,7 @@ function JobList() {
     errors: null
   });
 
-  // console.log("in JobList, jobs= ", jobs);
+  console.log("in JobList, jobs= ", jobs);
 
   async function fetchJobs() {
 
@@ -67,11 +67,7 @@ function JobList() {
 
     try {
       const id = findId(title);
-      console.log("in JobList, title = ", title);
-      console.log("in JobList, id = ", id);
-
       const foundJob = await JoblyApi.getJob(id);
-      console.log("in JobList, foundJob = ", foundJob);
       setJobs({
         ...jobs,
         isLoading: false,
@@ -100,7 +96,6 @@ function JobList() {
 
   return (
     <div className="JobList">
-      Bye.
       <SearchForm searchFor={searchFor} />
       {jobs.searchedJob
         ? <JobCardList jobs={[jobs.searchedJob]} />

@@ -12,7 +12,8 @@ import React from 'react';
 function Home() {
   return (
     <div className="Home">
-      Hello.
+      <h1>Jobly</h1>
+      <p>All the jobs in one, convenient place.</p>
     </div>
   );
 }
