@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
  * State: companies : {
  *   data: [ { handle, name, description, numEmployees, logoUrl }, ...],
  *   isloading:true/false,
- *   searchedCompany: { handle, name, description, numEmployees, logoUrl }
+ *   searchedCompanies: [{ handle, name, description, numEmployees, logoUrl },..]
  *   errors: null
  * }
  *
@@ -68,7 +68,7 @@ function CompanyList() {
       });
 
       if (foundCompanies.length === 0) {
-        throw new Error('No Results Found');
+        throw new Error('Sorry, no results were found!');
       }
     } catch (err) {
 
@@ -87,7 +87,12 @@ function CompanyList() {
     return <h1>Loading...</h1>;
   } else if (companies.errors) {
     console.log('CompanyList error=', companies.errors);
-    return <b>{companies.errors.message}</b>;
+    return (
+      <div>
+        <SearchForm searchFor={searchFor} />
+        <b>{companies.errors.message}</b>
+      </div>
+    );
   }
 
   const displayCompanies = companies.data.map(company =>

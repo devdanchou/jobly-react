@@ -129,8 +129,15 @@ class JoblyApi {
    *
    *   { jobs: [ { id, title, salary, equity, companyHandle, companyName }, ...] }
    */
-  static async getJobs() {
-    let res = await this.request("jobs");
+  static async getJobs(title) {
+    let res;
+
+    if (title) {
+      res = await this.request("jobs/", { title: title });
+    } else {
+      res = await this.request("jobs/");
+    }
+
     return res.jobs;
   }
 

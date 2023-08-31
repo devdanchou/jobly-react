@@ -11,8 +11,7 @@ import JoblyApi from './api';
  * State: jobs: {
  *  data: [ { id, title, salary, equity, companyHandle, companyName }, ...],
  *   isloading:true/false,
- *   searchedJob: { id, title, salary, equity, company }
- *    where company is { handle, name, description, numEmployees, logoUrl }
+ *   searchedJobs: [ { id, title, salary, equity, companyHandle, companyName }, ...]
  *   errors: null
  *
  * }
@@ -25,7 +24,7 @@ function JobList() {
   const [jobs, setJobs] = useState({
     data: null,
     isLoading: true,
-    searchedJob: null,
+    searchedJobs: null,
     errors: null
   });
 
@@ -41,7 +40,7 @@ function JobList() {
       setJobs({
         isLoading: false,
         data: fetchedJobs,
-        searchedJob: null,
+        searchedJobs: null,
         errors: null
       });
 
@@ -50,36 +49,34 @@ function JobList() {
       setJobs({
         isLoading: false,
         data: null,
-        searchedJob: null,
+        searchedJobs: null,
         errors: err
       });
     }
   }
 
-  function findId(title) {
-    const foundJob = jobs.data.find((job) => job.title === title);
-    if (foundJob) {
-      return foundJob.id;
-    }
-  }
 
   async function searchFor(title) {
 
     try {
-      const id = findId(title);
-      const foundJob = await JoblyApi.getJob(id);
+      const foundJobs = await JoblyApi.getJobs(title);
+      console.log("in JobList, foundJobs =", foundJobs);
       setJobs({
         ...jobs,
         isLoading: false,
-        searchedJob: foundJob,
+        searchedJobs: foundJobs,
         errors: null
       });
+
+      if (foundJobs.length === 0) {
+        throw new Error('Sorry, no results were found!');
+      }
     } catch (err) {
 
       setJobs({
         ...jobs,
         isLoading: false,
-        searchedJob: null,
+        searchedJobs: null,
         errors: err
       });
     }
@@ -90,15 +87,20 @@ function JobList() {
     return <h1>Loading...</h1>;
   } else if (jobs.errors) {
     console.log('JobList error=', jobs.errors);
-    return <b> Errors occured!</b>;
+    return (
+      <div>
+        <SearchForm searchFor={searchFor} />
+        <b> {jobs.errors.message}</b>
+      </div>
+    );
   }
 
 
   return (
     <div className="JobList">
       <SearchForm searchFor={searchFor} />
-      {jobs.searchedJob
-        ? <JobCardList jobs={[jobs.searchedJob]} />
+      {jobs.searchedJobs && jobs.searchedJobs.length !== 0
+        ? <JobCardList jobs={jobs.searchedJobs} />
         : <JobCardList jobs={jobs.data} />
       }
     </div>
