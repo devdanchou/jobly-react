@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import JobCardList from './JobCardList';
 import JoblyApi from './api';
@@ -8,36 +8,36 @@ import JoblyApi from './api';
  *
  * Prop: none
  *
- * State: none atm
+ * State: company :{ handle, name, description, numEmployees, logoUrl, jobs }
+   *                   where jobs : [{ id, title, salary, equity }, ...]
  *
  * RouteList -> CompanyDetails -> JobCardList
  */
 
 function CompanyDetails() {
 
+  const DEFAULT_COMPANY = {
+    handle: "Baker-Santos",
+    name: "Baker-Santos",
+    description: `Compare certain use.
+                 Writer time lay word garden.
+                 Resource task interesting voice.`,
+
+    jobs: [{ title: 'Paramedic', Salary: '122_000', Equity: '0.047' }]
+  };
   const { handle } = useParams();
-  const [company, setCompany] = useState("");
+  const [company, setCompany] = useState(DEFAULT_COMPANY);
 
-  async function searchFor(handle) {
-    const searchCompany = await JoblyApi.getCompany(handle);
-    setCompany(searchCompany);
-  }
+  useEffect(function fetchCompanyWhenMounted() {
 
-  searchFor(handle);
+    async function fetchCompany(handle) {
+      const searchedCompany = await JoblyApi.getCompany(handle);
+      setCompany(searchedCompany);
+    }
 
-  //  async function getACompany(){
-  //    const company = await getCompany(handle)
-  //  set setCompany(company)
-  //}
+    fetchCompany(handle);
+  }, []);
 
-  // dummy company
-  // const company =
-  // {
-  //   id: 1,
-  //   handle: 'A',
-  //   description: ' I am A',
-  //   jobs: [{ id: 1, title: 'SE' }, { id: 2, title: 'front desk' }]
-  // };
 
   return (<div>
     {company &&

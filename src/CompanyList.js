@@ -9,15 +9,24 @@ import { Link } from 'react-router-dom';
  *
  * Prop: none
  *
- * State: none atm
+ * State: companies :[ { handle, name, description, numEmployees, logoUrl }, ...]
  *
  * RouteList -> CompanyList -> {CompanyCard, SearchForm}
  */
 
-
 function CompanyList() {
+
+  const DEFAULT_COMPANY = {
+    handle: "Baker-Santos",
+    name: "Baker-Santos",
+    description: `Compare certain use.
+                 Writer time lay word garden.
+                 Resource task interesting voice.`,
+
+    jobs: [{ title: 'Paramedic', Salary: '122_000', Equity: '0.047' }]
+  };
   const [companies, setCompanies] = useState([]);
-  const [currCompany, setCurrCompany] = useState("");
+  const [currCompany, setCurrCompany] = useState(DEFAULT_COMPANY);
 
   console.log("in CompanyList and companies = ", companies);
 
@@ -33,40 +42,22 @@ function CompanyList() {
   }, []);
 
 
-
-  //
-  //  async function getCompaniesList(){
-  //    const companies = await getCompanies()
-  //  set setCompanies(companies)
-  //}
-
-
-  // dummy companies
-  // const companies = [
-  //   {
-  //     id: 1,
-  //     handle: 'A',
-  //     description: ' I am A',
-  //   },
-  //   {
-  //     id: 2,
-  //     handle: 'B',
-  //     description: 'I am B',
-  //   }];
-
-  // dummy function
-
   async function searchFor(handle) {
     const searchCompany = await JoblyApi.getCompany(handle);
     setCurrCompany(searchCompany);
   }
 
 
-  const displayCompanies =
-    companies.map(company =>
+  let displayCompanies;
+
+  if (companies.length !== 0) {
+    displayCompanies = companies.map(company =>
       <Link key={company.handle} to={`/companies/${company.handle}`}>
         <CompanyCard company={company} />
       </Link>);
+  }
+
+
 
   return (
     <div className="CompanyList">
