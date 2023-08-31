@@ -5,14 +5,16 @@ import JobCard from './JobCard';
 * Display a list of jobcards
 *
 * Prop: jobs
-TODO: example of jobs
+* example: [ { id, title, salary, equity, companyHandle, companyName }, ...]
 *
-* State: none atm
+* State: none
 *
 * JobList -> JobCardList -> JobCard
 */
 
 function JobCardList({ jobs }) {
+
+  console.log("in JobCardList, jobs = ", jobs);
   return (
     <div className='JobCardList'>
       Jobs: {jobs.map(job => <JobCard key={job.id} job={job} />)}
