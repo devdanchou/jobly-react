@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
+
 /** Searchs for either companies or jobs
  *
- * Prop: none atm
+ * Prop: searchFor function
  *
- * State: none atm
+ * State: searchTerm: string
  *
  * {CompanyList, JobList} -> SearchForm
  *
@@ -12,11 +13,11 @@ import React, { useState } from 'react';
 
 function SearchForm({ searchFor }) {
   const [searchTerm, setSearchTerm] = useState("");
-  console.log("this is the searchterm", searchTerm);
+  console.log("in SearchForm, searchterm=", searchTerm);
 
   const handleChange = (event) => {
     const newSearchTerm = event.target.value;
-    console.log("this is the searchterm", newSearchTerm);
+    console.log("in SearchForm handleChange, searchterm=", newSearchTerm);
     setSearchTerm(newSearchTerm);
   };
 
