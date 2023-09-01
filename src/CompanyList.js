@@ -12,14 +12,12 @@ import { Link } from 'react-router-dom';
  * State: companies : {
  *   data: [ { handle, name, description, numEmployees, logoUrl }, ...],
  *   isloading:true/false,
- *   searchedCompanies: [{ handle, name, description, numEmployees, logoUrl },..]
- *   errors: null
  * }
  *
  * RouteList -> CompanyList -> {CompanyCard, SearchForm}
  */
 
-//TODO:
+//TODO: done!
 // make data === searchedJobs =>  state: {
 //     data: null,
 //     isLoading: true,
@@ -32,8 +30,6 @@ function CompanyList() {
   const [companies, setCompanies] = useState({
     data: null,
     isLoading: true,
-    searchedCompanies: null,
-    errors: null
   });
 
 
@@ -41,95 +37,53 @@ function CompanyList() {
 
   async function fetchCompanies() {
 
-    try {
-      const fetchedCompanies = await JoblyApi.getCompanies();
+    const fetchedCompanies = await JoblyApi.getCompanies();
 
-      console.log("CompanyList in fetchCompanies, fetchedCompanies =", fetchedCompanies);
+    console.log("CompanyList in fetchCompanies, fetchedCompanies =", fetchedCompanies);
 
-      setCompanies({
-        isLoading: false,
-        data: fetchedCompanies,
-        searchedCompanies: null,
-        errors: null
-      });
+    setCompanies({
+      isLoading: false,
+      data: fetchedCompanies,
+    });
 
-    } catch (err) {
-
-      setCompanies({
-        isLoading: false,
-        data: null,
-        searchedCompanies: null,
-        errors: err
-      });
-    }
   }
 
-
   async function searchFor(name) {
-    try {
-      const foundCompanies = await JoblyApi.getCompanies(name);
-      setCompanies({
-        ...companies,
-        isLoading: false,
-        searchedCompanies: foundCompanies,
-        errors: null
-      });
-      // TODO: don't consider not-found as an error
-      if (foundCompanies.length === 0) {
-        throw new Error('Sorry, no results were found!');
-      }
-    } catch (err) {
 
-      setCompanies({
-        ...companies,
-        isLoading: false,
-        searchedCompanies: null,
-        errors: err
-      });
-    }
+    const fetchedCompanies = await JoblyApi.getCompanies(name);
+
+    setCompanies({
+      isLoading: false,
+      data: fetchedCompanies,
+    });
 
   }
 
   if (companies.isLoading) {
     fetchCompanies();
     return <h1>Loading...</h1>;
-  } else if (companies.errors) {
-    console.log('CompanyList error=', companies.errors);
-    return (
-      <div>
-        <SearchForm searchFor={searchFor} />
-        <b>{companies.errors.message}</b>
-      </div>
-    );
   }
+  //TODO: done!
+  // const displayCompanies = companies.data.map(company =>
+  //   <Link key={company.handle} to={`/companies/${company.handle}`}>
+  //     <CompanyCard company={company} />
+  //   </Link>);
 
-
-  const displayCompanies = companies.data.map(company =>
-    <Link key={company.handle} to={`/companies/${company.handle}`}>
-      <CompanyCard company={company} />
+  const displayCompanies = companies.data.map(({ handle, name, description, logoUrl }) =>
+    <Link key={handle} to={`/companies/${handle}`}>
+      <CompanyCard name={name} description={description} logoUrl={logoUrl} />
     </Link>);
-
-  //TODO: don't need this
-  // const displaySearchedCompanies = companies.searchedCompanies?.map(
-  //   company =>
-  //     <Link key={company.handle} to={`/companies/${company.handle}`}>
-  //       <CompanyCard company={company} />
-  //     </Link>
-  // );
 
 
   return (
     <div className="CompanyList">
       <SearchForm searchFor={searchFor} />
+      {/* TODO:  done! */}
+      {companies.data.length === 0
+        ? <h1>Sorry, no results found</h1>
+        : displayCompanies
+      }
 
-      {/* TODO: companies.data.length === 0
-           ?<h1> Not found</h1>
-           : displayCompanies
-      */}
-      {/* TODO:  delete the code below*/}
-      {/* {companies.searchedCompanies && companies.searchedCompanies.length !== 0
-        ? displaySearchedCompanies
-        : displayCompanies} */}
     </div>
   );
 }

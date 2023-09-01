@@ -4,25 +4,26 @@ import './CompanyCard.css';
 /** Presentational Component.
  * Provides details about a company.
  *
- * Prop: company : { handle, name, description, numEmployees, logoUrl }
+ * Prop: company : { name, description,logoUrl }
  *
  * State: none
  *
  * CompanyList -> CompanyCard
  */
 
-//TODO: destructering what we need here
-function CompanyCard({ company }) {
+//TODO: destructering what we need here  done!
+
+function CompanyCard({ name, description, logoUrl }) {
 
   return (
     <div className='CompanyCard'>
       <div>
-        <p>{company.name}</p>
-        <p>{company.description}</p>
+        <p>{name}</p>
+        <p>{description}</p>
       </div>
-      {company.logoUrl
-        ? <img className='CompanyCard-img' src={company.logoUrl} alt={company.name} />
-        : <img className='CompanyCard-img' src='/logos/logo1.png' alt={company.name} />
+      {logoUrl
+        ? <img className='CompanyCard-img' src={logoUrl} alt={name} />
+        : <img className='CompanyCard-img' src='/logos/logo1.png' alt={name} />
       }
     </div>
   );
