@@ -13,6 +13,7 @@ import './CompanyCard.css';
 
 //TODO: destructering what we need here  done!
 
+
 function CompanyCard({ name, description, logoUrl }) {
 
   return (

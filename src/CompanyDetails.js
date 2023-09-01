@@ -30,19 +30,13 @@ function CompanyDetails() {
 
   useEffect(function fetchCompanyOnHandleChange() {
     async function fetchCompany(handle) {
-      try {
-        const searchedCompany = await JoblyApi.getCompany(handle);
-        setCompany({
-          data: searchedCompany,
-          isLoading: false,
-        });
-      } catch (err) {
-        setCompany({
-          data: null,
-          isLoading: false,
-        });
-      }
+      const searchedCompany = await JoblyApi.getCompany(handle);
+      setCompany({
+        data: searchedCompany,
+        isLoading: false,
+      });
     }
+
     fetchCompany(handle);
   }, [handle]);
 
