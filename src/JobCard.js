@@ -7,14 +7,13 @@ import './JobCard.css';
  * Prop: job object
  *    { title, salary, equity, companyName }
  *
- *  If it is from CompanyDetails: there is no comapanyName property
+ *  If it is from CompanyDetails: there is no companyName property
  *
  * State: none
  *
  * {jobList, CompanyDetails } -> JobCardList -> JobCard
  */
 
-//TODO: destructering what we need here
 function JobCard({ title, salary, equity, companyName }) {
   // console.log("in JobCard, job =", job);
   return (

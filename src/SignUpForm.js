@@ -3,7 +3,7 @@ import userContext from "./userContext";
 
 /** Form for signing up in new user.
  *
- * prop: signup function
+ * prop: none
  * state: formData
  *
  * App -> RouteList -> SignUpForm

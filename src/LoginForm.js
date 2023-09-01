@@ -3,7 +3,7 @@ import userContext from "./userContext";
 
 /** Form for logging in current user.
  *
- * prop: login function
+ * prop: none
  * state: formData
  *
  * App -> RouteList -> LoginForm

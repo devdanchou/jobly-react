@@ -16,14 +16,11 @@ import JobCard from './JobCard';
 * {JobList + CompanyDetails}  -> JobCardList -> JobCard
 */
 
-//TODO: destructering what we need here
 function JobCardList({ jobs }) {
 
   console.log("in JobCardList, jobs = ", jobs);
   return (
     <div className='JobCardList'>
-      {/* TODO: destructering what we need here */}
-      {/* {jobs.map(job => <JobCard key={job.id} job={job} />)} */}
       {jobs.map(({ id, title, salary, equity, companyName }) =>
         <JobCard
           key={id}

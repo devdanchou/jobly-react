@@ -17,14 +17,6 @@ import { Link } from 'react-router-dom';
  * RouteList -> CompanyList -> {CompanyCard, SearchForm}
  */
 
-//TODO: done!
-// make data === searchedJobs =>  state: {
-//     data: null,
-//     isLoading: true,
-//  }
-
-// maybe [error, setError]= useState(null)
-
 function CompanyList() {
 
   const [companies, setCompanies] = useState({
@@ -63,11 +55,6 @@ function CompanyList() {
     fetchCompanies();
     return <h1>Loading...</h1>;
   }
-  //TODO: done!
-  // const displayCompanies = companies.data.map(company =>
-  //   <Link key={company.handle} to={`/companies/${company.handle}`}>
-  //     <CompanyCard company={company} />
-  //   </Link>);
 
   const displayCompanies = companies.data.map(({ handle, name, description, logoUrl }) =>
     <Link key={handle} to={`/companies/${handle}`}>
@@ -78,7 +65,6 @@ function CompanyList() {
   return (
     <div className="CompanyList">
       <SearchForm searchFor={searchFor} />
-      {/* TODO:  done! */}
       {companies.data.length === 0
         ? <h1>Sorry, no results found</h1>
         : displayCompanies

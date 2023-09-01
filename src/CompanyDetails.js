@@ -10,7 +10,7 @@ import JoblyApi from './api';
  *
  * State: company :{
  *    data: { handle, name, description, numEmployees, logoUrl, jobs },
- *    isLoading:true/false,
+ *    isLoading:true/false
  *    }
  *
  *    where jobs in data : [{ id, title, salary, equity }, ...]
@@ -18,8 +18,6 @@ import JoblyApi from './api';
  * RouteList -> CompanyDetails -> JobCardList
  */
 
-//TODO: make sure we have company name instead of company handle done!
-// delete errors property in state done!
 function CompanyDetails() {
 
   const { handle } = useParams();
