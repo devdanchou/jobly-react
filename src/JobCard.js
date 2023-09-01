@@ -4,12 +4,10 @@ import './JobCard.css';
 /** Presentional Component
  * Provides details about a job.
  *
- * Prop:
- *  If it is from JobList:
- *     job : {{ id, title, salary, equity, companyHandle, companyName }
+ * Prop: job object
+ *    { title, salary, equity, companyName }
  *
- *  If it is from CompanyDetails:
- *     job : { id, title, salary, equity }
+ *  If it is from CompanyDetails: there is no comapanyName property
  *
  * State: none
  *
@@ -17,14 +15,14 @@ import './JobCard.css';
  */
 
 //TODO: destructering what we need here
-function JobCard({ job }) {
+function JobCard({ title, salary, equity, companyName }) {
   // console.log("in JobCard, job =", job);
   return (
     <div className='JobCard'>
-      <p>{job.title}</p>
-      <p>{job.companyHandle}</p>
-      <p>Salary: {job.salary}</p>
-      <p>Equity: {job.equity}</p>
+      <p>{title}</p>
+      <p>{companyName}</p>
+      <p>Salary: {salary}</p>
+      <p>Equity: {equity}</p>
     </div>
   );
 }

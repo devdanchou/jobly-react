@@ -11,7 +11,6 @@ import JoblyApi from './api';
  * State: company :{
  *    data: { handle, name, description, numEmployees, logoUrl, jobs },
  *    isLoading:true/false,
- *    errors:null
  *    }
  *
  *    where jobs in data : [{ id, title, salary, equity }, ...]
@@ -19,14 +18,14 @@ import JoblyApi from './api';
  * RouteList -> CompanyDetails -> JobCardList
  */
 
-//TODO: make sure we have company name instead of company handle
+//TODO: make sure we have company name instead of company handle done!
+// delete errors property in state done!
 function CompanyDetails() {
 
   const { handle } = useParams();
   const [company, setCompany] = useState({
     data: null,
     isLoading: true,
-    errors: null
   });
 
   useEffect(function fetchCompanyOnHandleChange() {
@@ -36,13 +35,11 @@ function CompanyDetails() {
         setCompany({
           data: searchedCompany,
           isLoading: false,
-          errors: null
         });
       } catch (err) {
         setCompany({
           data: null,
           isLoading: false,
-          errors: err
         });
       }
     }
@@ -51,10 +48,6 @@ function CompanyDetails() {
 
   if (company.isLoading) {
     return <h1>Loading...</h1>;
-  } else if (company.errors) {
-    console.log('error=', company.errors);
-    // TODO: more meaningful error message
-    return <b>Errors occured!</b>;
   }
 
   return (
