@@ -8,12 +8,18 @@ import Home from './Home';
 import CompanyList from './CompanyList';
 import CompanyDetail from './CompanyDetails';
 import JobList from './JobList';
+import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
+import ProfileForm from './ProfileForm';
 
 /** Shows routes to:
  * - homepage
  * - companies
  * - companies/:handle
  * - jobs
+ * - login
+ * - signup
+ * - profile
  *
  * Props: none
  *
@@ -43,6 +49,21 @@ function RouteList() {
       <Route
         path="/jobs"
         element={<JobList />}
+      />
+
+      <Route
+        path="/login"
+        element={<LoginForm />}
+      />
+
+      <Route
+        path="/signup"
+        element={<SignUpForm />}
+      />
+
+      <Route
+        path="/profile"
+        element={<ProfileForm />}
       />
 
       <Route

@@ -5,32 +5,39 @@ import "./NavBar.css";
  * - homepage
  * - companies
  * - jobs
+ * - login
+ * - signup
+ * - profile
  *
- * Props:
- * links = ['companies', 'jobs']
+ * Props: none
  *
  * State: none
  *
  * App -> NavBar
  */
-//TODO: not dynamic
-function NavBar({ links }) {
-  const navLinks = links.map(link => (
-    <NavLink className='NavBar-link'
-      key={link}
-      to={`/${link.toLowerCase()}`}
-    >
-      {link}
-    </NavLink>
-  ));
 
+function NavBar() {
   return (
 
     <nav className="NavBar">
       <NavLink className='NavBar-link' to="/" end>
         Jobly
       </NavLink>
-      {navLinks}
+      <NavLink className='NavBar-link' to="/companies" end>
+        Companies
+      </NavLink>
+      <NavLink className='NavBar-link' to="/jobs" end>
+        Jobs
+      </NavLink>
+      <NavLink className='NavBar-link' to="/login" end>
+        Login
+      </NavLink>
+      <NavLink className='NavBar-link' to="/signup" end>
+        Sign Up
+      </NavLink>
+      <NavLink className='NavBar-link' to="/profile" end>
+        Profile
+      </NavLink>
     </nav>
 
   );

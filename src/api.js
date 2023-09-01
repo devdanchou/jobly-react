@@ -184,6 +184,46 @@ class JoblyApi {
     let res = await this.request(`companies/${id}`, fields, "patch");
     return res.job;
   }
+
+  //~~~~~~~~~~~~~~~~~~~~~~~~~~~ Users ~~~~~~~~~~~~~~~~~~~~~~~~~//
+
+  /** Login user
+  *
+  *  Takes username and password
+  *
+  *  Returns a token
+  */
+  static async login(username, password) {
+    let res = await this.request("token", data = { username, password }, "post");
+    return res.token;
+  }
+
+  /** Signup user
+  *
+  *  Takes fields of a user
+  *  fields can be: { username, password, firstName, lastName, email }
+  *
+  *  Returns a token
+  */
+
+  static async signup(fields) {
+    let res = await this.request("register", fields, "post");
+    return res.token;
+  }
+
+  /** Edit user information
+  *
+  *  Takes fields of a user
+  *  fields can be: { firstName, lastName, password, email }
+  *
+  *  Returns user
+  *  Example: { username, firstName, lastName, email, isAdmin }
+  */
+  static async edit(fields) {
+    let res = await this.request(`/${username}`, fields, "patch");
+    return res.user;
+  }
+
 }
 
 export default JoblyApi;
