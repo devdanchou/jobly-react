@@ -18,6 +18,8 @@ class JoblyApi {
     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 
+
+
   static async request(endpoint, data = {}, method = "get") {
     // (endpoint) => (endpoint, undefined, undefined)
     // (endpoint) => (endpoint, {}, "delete")
@@ -194,7 +196,8 @@ class JoblyApi {
   *  Returns a token
   */
   static async login(username, password) {
-    let res = await this.request("token", data = { username, password }, "post");
+    let res = await this.request("auth/token", { username, password }, "post");
+    this.token = res.token;
     return res.token;
   }
 
@@ -207,7 +210,8 @@ class JoblyApi {
   */
 
   static async signup(fields) {
-    let res = await this.request("register", fields, "post");
+    let res = await this.request("auth/register", fields, "post");
+    this.token = res.token;
     return res.token;
   }
 
@@ -219,8 +223,8 @@ class JoblyApi {
   *  Returns user
   *  Example: { username, firstName, lastName, email, isAdmin }
   */
-  static async edit(fields) {
-    let res = await this.request(`/${username}`, fields, "patch");
+  static async edit(username, fields) {
+    let res = await this.request(`users/${username}`, fields, "patch");
     return res.user;
   }
 
