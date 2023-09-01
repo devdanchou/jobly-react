@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import userContext from "./userContext";
 
 /** Form for logging in current user.
  *
@@ -8,9 +9,10 @@ import React, { useState } from "react";
  * App -> RouteList -> LoginForm
  */
 
-function LoginForm({ login }) {
+function LoginForm() {
   const initialState = { username: "", password: "" };
   const [formData, setFormData] = useState(initialState);
+  const { login } = useContext(userContext);
 
   /** Send {username, password} to parent
    *    & clear form. */

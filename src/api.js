@@ -191,12 +191,13 @@ class JoblyApi {
 
   /** Login user
   *
-  *  Takes username and password
+  *  Takes fields of a user
+  *  fields can be: { username, password}
   *
   *  Returns a token
   */
-  static async login(username, password) {
-    let res = await this.request("auth/token", { username, password }, "post");
+  static async login(fields) {
+    let res = await this.request("auth/token", fields, "post");
     this.token = res.token;
     return res.token;
   }
