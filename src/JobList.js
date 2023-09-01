@@ -19,6 +19,15 @@ import JoblyApi from './api';
  * RouteList -> JobList -> {JobCardList, SearchForm}
  */
 
+// TODO:
+// make data === searchedJobs =>  state: {
+//     data: null,
+//     isLoading: true,
+//  }
+
+// maybe [error, setError]= useState(null)
+//  error='...' || errors=[errors...]
+
 function JobList() {
 
   const [jobs, setJobs] = useState({
@@ -68,6 +77,7 @@ function JobList() {
         errors: null
       });
 
+      // TODO: don't consider not-found as an error
       if (foundJobs.length === 0) {
         throw new Error('Sorry, no results were found!');
       }
@@ -99,6 +109,12 @@ function JobList() {
   return (
     <div className="JobList">
       <SearchForm searchFor={searchFor} />
+
+      {/* TODO: job.data.length === 0
+           ?<h1> Not found</h1>
+           : <JobCardList jobs={jobs.data} />
+      */}
+      {/* TODO:  delete the code below*/}
       {jobs.searchedJobs && jobs.searchedJobs.length !== 0
         ? <JobCardList jobs={jobs.searchedJobs} />
         : <JobCardList jobs={jobs.data} />

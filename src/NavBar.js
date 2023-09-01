@@ -13,7 +13,7 @@ import "./NavBar.css";
  *
  * App -> NavBar
  */
-
+//TODO: not dynamic
 function NavBar({ links }) {
   const navLinks = links.map(link => (
     <NavLink className='NavBar-link'

@@ -19,7 +19,7 @@ import JoblyApi from './api';
  * RouteList -> CompanyDetails -> JobCardList
  */
 
-
+//TODO: make sure we have company name instead of company handle
 function CompanyDetails() {
 
   const { handle } = useParams();
@@ -53,12 +53,13 @@ function CompanyDetails() {
     return <h1>Loading...</h1>;
   } else if (company.errors) {
     console.log('error=', company.errors);
+    // TODO: more meaningful error message
     return <b>Errors occured!</b>;
   }
 
   return (
     <div className="CompanyDetails" >
-      <p>{company.data.handle}</p>
+      <p>{company.data.name}</p>
       <p>{company.data.description}</p>
       <JobCardList jobs={company.data.jobs} />
     </div>

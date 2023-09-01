@@ -11,6 +11,7 @@ import './CompanyCard.css';
  * CompanyList -> CompanyCard
  */
 
+//TODO: destructering what we need here
 function CompanyCard({ company }) {
 
   return (

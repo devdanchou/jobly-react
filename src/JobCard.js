@@ -16,6 +16,7 @@ import './JobCard.css';
  * {jobList, CompanyDetails } -> JobCardList -> JobCard
  */
 
+//TODO: destructering what we need here
 function JobCard({ job }) {
   // console.log("in JobCard, job =", job);
   return (

@@ -19,6 +19,14 @@ import { Link } from 'react-router-dom';
  * RouteList -> CompanyList -> {CompanyCard, SearchForm}
  */
 
+//TODO:
+// make data === searchedJobs =>  state: {
+//     data: null,
+//     isLoading: true,
+//  }
+
+// maybe [error, setError]= useState(null)
+
 function CompanyList() {
 
   const [companies, setCompanies] = useState({
@@ -66,7 +74,7 @@ function CompanyList() {
         searchedCompanies: foundCompanies,
         errors: null
       });
-
+      // TODO: don't consider not-found as an error
       if (foundCompanies.length === 0) {
         throw new Error('Sorry, no results were found!');
       }
@@ -95,25 +103,33 @@ function CompanyList() {
     );
   }
 
+
   const displayCompanies = companies.data.map(company =>
     <Link key={company.handle} to={`/companies/${company.handle}`}>
       <CompanyCard company={company} />
     </Link>);
 
-  const displaySearchedCompanies = companies.searchedCompanies?.map(
-    company =>
-      <Link key={company.handle} to={`/companies/${company.handle}`}>
-        <CompanyCard company={company} />
-      </Link>
-  );
+  //TODO: don't need this
+  // const displaySearchedCompanies = companies.searchedCompanies?.map(
+  //   company =>
+  //     <Link key={company.handle} to={`/companies/${company.handle}`}>
+  //       <CompanyCard company={company} />
+  //     </Link>
+  // );
 
 
   return (
     <div className="CompanyList">
       <SearchForm searchFor={searchFor} />
-      {companies.searchedCompanies && companies.searchedCompanies.length !== 0
+
+      {/* TODO: companies.data.length === 0
+           ?<h1> Not found</h1>
+           : displayCompanies
+      */}
+      {/* TODO:  delete the code below*/}
+      {/* {companies.searchedCompanies && companies.searchedCompanies.length !== 0
         ? displaySearchedCompanies
-        : displayCompanies}
+        : displayCompanies} */}
     </div>
   );
 }
