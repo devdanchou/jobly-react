@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import userContext from "./userContext";
 
 /** Form for signing up in new user.
  *
@@ -8,7 +9,7 @@ import React, { useState } from "react";
  * App -> RouteList -> SignUpForm
  */
 
-function SignUpForm({ signup }) {
+function SignUpForm() {
   const initialState = {
     username: "",
     password: "",
@@ -16,6 +17,7 @@ function SignUpForm({ signup }) {
     lastName: "",
     email: ""
   };
+  const { signup } = useContext(userContext);
 
   const [formData, setFormData] = useState(initialState);
 

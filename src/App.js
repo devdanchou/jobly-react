@@ -2,7 +2,7 @@ import RouteList from "./Routelist";
 import { BrowserRouter } from "react-router-dom";
 import NavBar from "./NavBar";
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import JoblyApi from './api.js';
 import jwt_decode from "jwt-decode";
 import userContext from "./userContext";
@@ -24,26 +24,6 @@ function App() {
 
   const [user, setUser] = useState({ token: '', currentUser: null });
 
-  // just for testing
-  // useEffect(function loginWhenMounted() {
-  //   async function login() {
-
-  //     const token = await JoblyApi.login('testtest', 'password');
-
-  //     console.log("App in login, token=", token);
-
-  //     // decode
-  //     // decoded: {username: 'testtest', isAdmin: false, iat: 1693603878}
-
-  //     const decoded = jwt_decode(token);
-  //     console.log('App in login after decode=', decoded);
-
-  //     setUser({ token: token, currentUser: decoded });
-  //   }
-
-  //   login();
-  // }, []);
-
   /**
   * Login user
   * Takes fields of a user
@@ -59,30 +39,11 @@ function App() {
 
     // decode
     // decoded: {username: 'testtest', isAdmin: false, iat: 1693603878}
-
     const decoded = jwt_decode(token);
     console.log('App in login after decode=', decoded);
 
     setUser({ token: token, currentUser: decoded });
   }
-
-  // useEffect(function signupWhenMounted() {
-  //   async function signup(fields) {
-  //     const newUser = { username: 'taco', password: 'belll', firstName: 'taco', lastName: 'bell', email: 'tacobell@gmail.com' };
-  //     const token = await JoblyApi.signup(newUser);
-
-  //     console.log("App in signup, token=", token);
-
-  //     // decode
-  //     // decoded: {username: 'testtest', isAdmin: false, iat: 1693603878}
-
-  //     const decoded = jwt_decode(token);
-  //     console.log('App in signup after decode=', decoded);
-
-  //     setUser({ token: token, currentUser: decoded });
-  //   }
-  //   signup();
-  // }, []);
 
   /**
    * Signup user
@@ -108,7 +69,7 @@ function App() {
   // login => token, done
   // setUser({token: token}) done
   //  username<= decode(token) done
-  // signup
+  // signup done
   // logout??
   // need to have function in api.js => set token: null, currentUser:null
   // edit
