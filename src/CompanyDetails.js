@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import JobCardList from './JobCardList';
 import JoblyApi from './api';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
+
 /** Presentional Component
  *  Display company details
  *
