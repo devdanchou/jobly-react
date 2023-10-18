@@ -1,3 +1,9 @@
+# jobly-react
+
+Jobly's a single page React application, inspired by Linkedin, where users can view and submit job applications.
+
+Jobly is a RESTful API job application platform. Built to exercise implementation of authentication/authorization features. It was created with a React frontend and Express backend.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
